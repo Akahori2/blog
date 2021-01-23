@@ -12,7 +12,15 @@
     "noEmit": true,
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "isolatedModules": true
+		"isolatedModules": true,
+		"baseUrl": ".",
+		"paths": {
+			"@blog/styles/*": ["src/styles/*"],
+			"@blog/lib/*": ["src/lib/*"],
+			"@blog/types/*": ["src/types/*"],
+			"@blog/components/*": ["src/components/*"],
+			"@blog/domain/*": ["src/domain/*"],
+		}
   },
   "exclude": ["node_modules"],
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"]
