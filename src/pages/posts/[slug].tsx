@@ -1,27 +1,27 @@
-import Container from '@blog/components/container'
-import Header from '@blog/components/header'
-import Layout from '@blog/components/layout'
-import PostBody from '@blog/components/post-body'
-import PostHeader from '@blog/components/post-header'
-import PostTitle from '@blog/components/post-title'
-import { getAllPosts, getPostBySlug } from '@blog/lib/api'
-import { CMS_NAME } from '@blog/lib/constants'
-import markdownToHtml from '@blog/lib/markdownToHtml'
-import PostType from '@blog/types/post'
-import ErrorPage from 'next/error'
-import Head from 'next/head'
-import { useRouter } from 'next/router'
+import Container from '@blog/components/container';
+import Header from '@blog/components/header';
+import Layout from '@blog/components/layout';
+import PostBody from '@blog/components/post-body';
+import PostHeader from '@blog/components/post-header';
+import PostTitle from '@blog/components/post-title';
+import { getAllPosts, getPostBySlug } from '@blog/lib/api';
+import { CMS_NAME } from '@blog/lib/constants';
+import markdownToHtml from '@blog/lib/markdownToHtml';
+import PostType from '@blog/types/post';
+import ErrorPage from 'next/error';
+import Head from 'next/head';
+import { useRouter } from 'next/router';
 
 type Props = {
-  post: PostType
-  morePosts: PostType[]
-  preview?: boolean
-}
+  post: PostType;
+  morePosts: PostType[];
+  preview?: boolean;
+};
 
 const Post = ({ post, morePosts, preview }: Props) => {
-  const router = useRouter()
+  const router = useRouter();
   if (!router.isFallback && !post?.slug) {
-    return <ErrorPage statusCode={404} />
+    return <ErrorPage statusCode={404} />;
   }
   return (
     <Layout preview={preview}>
@@ -34,7 +34,8 @@ const Post = ({ post, morePosts, preview }: Props) => {
             <article className="mb-32">
               <Head>
                 <title>
-                  {post.title} | Next.js Blog Example with {CMS_NAME}
+                  {post.title} | Next.js Blog Example with
+                  {CMS_NAME}
                 </title>
                 <meta property="og:image" content={post.ogImage.url} />
               </Head>
@@ -50,16 +51,16 @@ const Post = ({ post, morePosts, preview }: Props) => {
         )}
       </Container>
     </Layout>
-  )
-}
+  );
+};
 
-export default Post
+export default Post;
 
 type Params = {
   params: {
-    slug: string
-  }
-}
+    slug: string;
+  };
+};
 
 export async function getStaticProps({ params }: Params) {
   const post = getPostBySlug(params.slug, [
@@ -70,8 +71,8 @@ export async function getStaticProps({ params }: Params) {
     'content',
     'ogImage',
     'coverImage',
-  ])
-  const content = await markdownToHtml(post.content || '')
+  ]);
+  const content = await markdownToHtml(post.content || '');
 
   return {
     props: {
@@ -80,11 +81,11 @@ export async function getStaticProps({ params }: Params) {
         content,
       },
     },
-  }
+  };
 }
 
 export async function getStaticPaths() {
-  const posts = getAllPosts(['slug'])
+  const posts = getAllPosts(['slug']);
 
   return {
     paths: posts.map((posts) => {
@@ -92,8 +93,8 @@ export async function getStaticPaths() {
         params: {
           slug: posts.slug,
         },
-      }
+      };
     }),
     fallback: false,
-  }
+  };
 }
