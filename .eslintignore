@@ -2,6 +2,6 @@ build/
 public/
 **/coverage/
 **/node_modules/
+**/generated/
 **/*.min.js
 *.config.js
-.eslintrc.js
