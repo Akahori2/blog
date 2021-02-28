@@ -4,11 +4,11 @@ import { Asset, Entry } from "contentful";
 import { Document } from "@contentful/rich-text-types";
 
 export interface IAuthorFields {
-  /** Name */
-  name?: string | undefined;
+  /** name */
+  name: string;
 
-  /** Image */
-  image?: Asset | undefined;
+  /** image */
+  image: Asset;
 }
 
 export interface IAuthor extends Entry<IAuthorFields> {
@@ -30,25 +30,25 @@ export interface IAuthor extends Entry<IAuthorFields> {
 
 export interface IPostFields {
   /** title */
-  title?: string | undefined;
+  title: string;
 
   /** sub title */
   subTitle?: string | undefined;
 
   /** slug */
-  slug?: string | undefined;
+  slug: string;
 
   /** date */
-  date?: string | undefined;
+  date: string;
 
   /** author */
-  author?: Entry<{ [fieldId: string]: unknown }> | undefined;
+  author: IAuthor;
 
   /** coverImage */
   coverImage?: Asset | undefined;
 
   /** content */
-  content?: string | undefined;
+  content: string;
 }
 
 export interface IPost extends Entry<IPostFields> {
@@ -70,6 +70,6 @@ export interface IPost extends Entry<IPostFields> {
 
 export type CONTENT_TYPE = "author" | "post";
 
-export type LOCALE_CODE = "en-US";
+export type LOCALE_CODE = "ja";
 
-export type CONTENTFUL_DEFAULT_LOCALE_CODE = "en-US";
+export type CONTENTFUL_DEFAULT_LOCALE_CODE = "ja";

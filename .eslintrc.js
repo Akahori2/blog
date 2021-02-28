@@ -35,7 +35,8 @@ module.exports = {
   ],
   root: true,
   rules: {
-    'no-use-before-define': 'off',
+		'no-use-before-define': 'off',
+		"no-console": "off",
     '@typescript-eslint/no-use-before-define': ['error'],
     'no-void': ['error', { allowAsStatement: true }],
     '@typescript-eslint/no-unused-vars': [
@@ -49,6 +50,8 @@ module.exports = {
       },
 		],
 		'@typescript-eslint/explicit-module-boundary-types': 'off',
+		'@typescript-eslint/restrict-template-expressions': 'off',
+		'jsx-a11y/anchor-is-valid': 'off',
     'import/extensions': [
       'error',
       'ignorePackages',
@@ -58,7 +61,8 @@ module.exports = {
         ts: 'never',
         tsx: 'never',
       },
-    ],
+		],
+		'import/prefer-default-export': 'off',
     'react/jsx-filename-extension': [
       'error',
       {
@@ -70,6 +74,7 @@ module.exports = {
 		'react/jsx-one-expression-per-line': 'off',
 		'react/jsx-indent': 'off',
 		'react/jsx-indent-props': 'off',
+		'react/require-default-props': 'off',
 		'prettier/prettier': [
 			'error',
 			{

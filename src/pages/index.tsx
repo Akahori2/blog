@@ -5,14 +5,17 @@ import Layout from '@blog/components/layout';
 import MoreStories from '@blog/components/more-stories';
 import { getAllPosts } from '@blog/lib/api';
 import { CMS_NAME } from '@blog/lib/constants';
-import Post from '@blog/types/post';
+import { BlogPost } from '@blog/types/BlogPost';
+// import { IPostFields } from '@blog/types/generated/contentful';
+// import Post from '@blog/types/post';
 import Head from 'next/head';
 
 type Props = {
-	allPosts: Post[];
+	allPosts: BlogPost[];
 };
 
-const Index = ({ allPosts }: Props) => {
+const Index = (props: Props) => {
+	const { allPosts } = props;
 	const heroPost = allPosts[0];
 	const morePosts = allPosts.slice(1);
 	return (
@@ -26,16 +29,7 @@ const Index = ({ allPosts }: Props) => {
 				</Head>
 				<Container>
 					<Intro />
-					{heroPost && (
-						<HeroPost
-							title={heroPost.title}
-							coverImage={heroPost.coverImage}
-							date={heroPost.date}
-							author={heroPost.author}
-							slug={heroPost.slug}
-							excerpt={heroPost.excerpt}
-						/>
-					)}
+					{heroPost && <HeroPost {...heroPost} />}
 					{morePosts.length > 0 && <MoreStories posts={morePosts} />}
 				</Container>
 			</Layout>
@@ -46,7 +40,9 @@ const Index = ({ allPosts }: Props) => {
 export default Index;
 
 export const getStaticProps = async () => {
-	const allPosts = getAllPosts(['title', 'date', 'slug', 'author', 'coverImage', 'excerpt']);
+	const allPosts = await getAllPosts();
+
+	console.log('allposts', allPosts);
 
 	return {
 		props: { allPosts },

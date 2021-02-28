@@ -1,19 +1,13 @@
 import Link from 'next/link';
+import { BlogPost } from '@blog/types/BlogPost';
 import Avatar from './avatar';
 import DateFormatter from './date-formatter';
 import CoverImage from './cover-image';
-import Author from '../types/author';
 
-type Props = {
-	title: string;
-	coverImage: string;
-	date: string;
-	excerpt: string;
-	author: Author;
-	slug: string;
-};
+type Props = BlogPost;
 
-const PostPreview = ({ title, coverImage, date, excerpt, author, slug }: Props) => {
+const PostPreview = (props: Props) => {
+	const { title, coverImage, date, author, slug } = props;
 	return (
 		<div>
 			<div className="mb-5">
@@ -27,8 +21,8 @@ const PostPreview = ({ title, coverImage, date, excerpt, author, slug }: Props) 
 			<div className="text-lg mb-4">
 				<DateFormatter dateString={date} />
 			</div>
-			<p className="text-lg leading-relaxed mb-4">{excerpt}</p>
-			<Avatar name={author.name} picture={author.picture} />
+			{/* <p className="text-lg leading-relaxed mb-4">{excerpt}</p> */}
+			<Avatar name={author.name} picture={author.image} />
 		</div>
 	);
 };
